@@ -1,8 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import ApiRoute from './routes';
 
 const app = express();
 
+// Connecting 'MLAB' MongoDB
 const db = mongoose.connection;
 db.on('error', console.error);
 db.on('open', () => console.log('Connected to MongoDB Server...'));
@@ -16,6 +18,8 @@ import Account from './models/account';
 import Memo from './models/memo';
 
 const server_port = 3000;
+
+app.use('/api', ApiRoute);
 
 app.get('/', (req, res) => {
 	res.send('hello');
