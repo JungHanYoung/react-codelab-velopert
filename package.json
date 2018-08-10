@@ -1,0 +1,10 @@
+{
+  "name": "react-codelab-project",
+  "version": "1.0.0",
+  "description": "Since 2018.08, react-codelab-2016 (written by velopert) project again",
+  "main": "index.js",
+  "repository": "git@github.com:JungHanYoung/react-codelab-velopert.git",
+  "author": "Hanyoung Jeong <8735132@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
