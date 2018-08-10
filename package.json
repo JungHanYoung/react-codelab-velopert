@@ -8,15 +8,17 @@
 	"license": "MIT",
 	"private": false,
 	"scripts": {
-		"dev": "babel-node --presets=env server/index.js"
+		"dev": "nodemon --exec babel-node --presets=env server/index.js"
 	},
 	"dependencies": {
+		"body-parser": "^1.18.3",
 		"express": "^4.16.3",
 		"express-session": "^1.15.6",
 		"mongoose": "^5.2.7"
 	},
 	"devDependencies": {
 		"babel-core": "^6.26.3",
-		"babel-preset-env": "^1.7.0"
+		"babel-preset-env": "^1.7.0",
+		"nodemon": "^1.18.3"
 	}
 }
