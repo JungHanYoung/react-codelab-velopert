@@ -8,8 +8,6 @@ const router = Router();
  * BODY : username, password
  */
 router.post('/signup', (req, res) => {
-	console.log(req.body.username);
-	console.log(req.body.password);
 	if (!(req.body.username && req.body.password)) {
 		return res.send('fail - 폼에 username, password가 포함되어 있지 않습니다.');
 	}
@@ -18,17 +16,24 @@ router.post('/signup', (req, res) => {
 		return res.send('fail - username은 4글자 이상이어야 합니다.');
 	}
 
-	Account.create({
-		username: req.body.username,
-		password: req.body.password
-	})
-		.then((account) => {
-			res.send('success');
-		})
-		.catch((err) => {
-			console.error(err);
-			res.send('fail - 데이터 저장 중 오류가 발생했습니다.');
-		});
+	// username 중복체크
+	Account.findOne({ username: req.body.username }).then((account) => {
+		if (account) {
+			res.send('fail - 중복된 username 입니다.');
+		} else {
+			Account.create({
+				username: req.body.username,
+				password: req.body.password
+			})
+				.then((account) => {
+					res.send('success');
+				})
+				.catch((err) => {
+					console.error(err);
+					res.send('fail - 데이터 저장 중 오류가 발생했습니다.');
+				});
+		}
+	});
 });
 router.post('/signin', (req, res) => {
 	res.send('POST signin');
