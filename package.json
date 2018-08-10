@@ -1,19 +1,22 @@
 {
-  "name": "react-codelab-project",
-  "version": "1.0.0",
-  "description": "Since 2018.08, react-codelab-2016 (written by velopert) project again",
-  "main": "index.js",
-  "repository": "git@github.com:JungHanYoung/react-codelab-velopert.git",
-  "author": "Hanyoung Jeong <8735132@gmail.com>",
-  "license": "MIT",
-  "private": false,
-  "dependencies": {
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
-    "mongoose": "^5.2.7"
-  },
-  "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0"
-  }
+	"name": "react-codelab-project",
+	"version": "1.0.0",
+	"description": "Since 2018.08, react-codelab-2016 (written by velopert) project again",
+	"main": "index.js",
+	"repository": "git@github.com:JungHanYoung/react-codelab-velopert.git",
+	"author": "Hanyoung Jeong <8735132@gmail.com>",
+	"license": "MIT",
+	"private": false,
+	"scripts": {
+		"dev": "babel-node --presets=env server/index.js"
+	},
+	"dependencies": {
+		"express": "^4.16.3",
+		"express-session": "^1.15.6",
+		"mongoose": "^5.2.7"
+	},
+	"devDependencies": {
+		"babel-core": "^6.26.3",
+		"babel-preset-env": "^1.7.0"
+	}
 }
