@@ -68,10 +68,8 @@ function sessionCheck(req, res, next) {
 }
 
 function exactUserCheck(req, res, next) {
-	console.log(req.params.id);
 	if (req.params.id) {
 		Memo.findById(req.params.id).then((memo) => {
-			console.log(memo);
 			if (req.session.logininfo.username === memo.writer) {
 				next();
 			} else {

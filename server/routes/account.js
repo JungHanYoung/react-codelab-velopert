@@ -36,28 +36,29 @@ router.post('/signup', (req, res) => {
 	});
 });
 router.post('/signin', (req, res) => {
-	Account.findOne({ username: req.body.username })
-		.then((account) => {
-			// 폼의 username에 해당하는 회원정보 유무 체크
-			if (!account) {
-				res.send('fail - 해당 username의 회원정보는 없습니다.');
+	Account.findOne({ username: req.body.username }, (err, account) => {
+		if (err) throw err;
+		console.log(account);
+		// 폼의 username에 해당하는 회원정보 유무 체크
+		if (!account) {
+			res.send('fail - 해당 username의 회원정보는 없습니다.');
+		} else {
+			// 비밀번호 체크
+			// if (account.password === req.body.password) {
+			if (account.comparePassword(req.body.password)) {
+				req.session.logininfo = {
+					id: account.id,
+					username: account.username
+				};
+				res.send('로그인 성공**');
 			} else {
-				// 비밀번호 체크
-				if (account.password === req.body.password) {
-					req.session.logininfo = {
-						id: account.id,
-						username: account.username
-					};
-					res.send('로그인 성공**');
-				} else {
-					res.send('fail - 비밀번호가 틀립니다.');
-				}
+				res.send('fail - 비밀번호가 틀립니다.');
 			}
-		})
-		.catch((err) => {
-			console.error(err);
-			res.send('fail - 데이터베이스 작업 중 오류가 발생했습니다.');
-		});
+		}
+	}).catch((err) => {
+		console.error(err);
+		res.send('fail - 데이터베이스 작업 중 오류가 발생했습니다.');
+	});
 });
 
 router.get('/logininfo', (req, res) => {
