@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import session from 'express-session';
 
 import ApiRoute from './routes';
 
@@ -8,6 +9,13 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(
+	session({
+		secret: 'Jhy6978',
+		resave: false,
+		saveUninitialized: true
+	})
+);
 
 // Connecting 'MLAB' MongoDB
 const db = mongoose.connection;

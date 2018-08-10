@@ -44,6 +44,10 @@ router.post('/signin', (req, res) => {
 			} else {
 				// 비밀번호 체크
 				if (account.password === req.body.password) {
+					req.session.logininfo = {
+						id: account.id,
+						username: account.username
+					};
 					res.send('로그인 성공**');
 				} else {
 					res.send('fail - 비밀번호가 틀립니다.');
@@ -55,7 +59,13 @@ router.post('/signin', (req, res) => {
 			res.send('fail - 데이터베이스 작업 중 오류가 발생했습니다.');
 		});
 });
+
+router.get('/logininfo', (req, res) => {
+	res.send(req.session.logininfo);
+});
+
 router.post('/logout', (req, res) => {
+	req.session.destroy(console.error);
 	res.send('POST logout');
 });
 
